@@ -28,7 +28,7 @@ License: For each use you must have a valid license purchased only from above li
     <link href="{{  asset('admin/assets/css/style.bundle.css')  }}" rel="stylesheet" type="text/css" />
     <!--end::Global Stylesheets Bundle-->
     @yield('style')
-{{--    @livewireStyles--}}
+    @livewireStyles
     <style>
         @media (min-width: 992px){
             .header-fixed.toolbar-fixed .wrapper {
@@ -39,7 +39,6 @@ License: For each use you must have a valid license purchased only from above li
 </head>
 <!--end::Head-->
 <!--begin::Body-->
-{{  asset('admin/')  }}
 <body id="kt_body" class="header-fixed header-tablet-and-mobile-fixed toolbar-enabled toolbar-fixed toolbar-tablet-and-mobile-fixed aside-enabled aside-fixed" style="--kt-toolbar-height:55px;--kt-toolbar-height-tablet-and-mobile:55px">
 <!--begin::Main-->
 <!--begin::Root-->
@@ -93,8 +92,9 @@ License: For each use you must have a valid license purchased only from above li
                                 <span class="menu-title">Dashboard</span>
                             </a>
                         </div>
-                        <div class="menu-item">
-                            <a class="menu-link" href="#">
+                        @can('view-any', App\Models\Category::class)
+                            <div class="menu-item">
+                                <a class="menu-link" href="{{ route('categories') }}">
 										<span class="menu-icon">
 											<span class="svg-icon svg-icon-primary svg-icon-2x">
                                                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -106,9 +106,46 @@ License: For each use you must have a valid license purchased only from above li
                                                 </svg>
                                             </span>
 										</span>
-                                <span class="menu-title">Admins</span>
-                            </a>
-                        </div>
+                                    <span class="menu-title">Categories</span>
+                                </a>
+                            </div>
+                        @endcan
+                        @can('view-any', App\Models\Post::class)
+                            <div class="menu-item">
+                                <a class="menu-link" href="{{ route('posts') }}">
+										<span class="menu-icon">
+											<span class="svg-icon svg-icon-primary svg-icon-2x">
+                                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                        <rect x="0" y="0" width="24" height="24"/>
+                                                        <path d="M12.9863016,8.83409843 C12.9953113,8.88805868 13,8.94348179 13,9 L13,11 L17,11 C18.1045695,11 19,11.8954305 19,13 L19,16 L5,16 L5,13 C5,11.8954305 5.8954305,11 7,11 L11,11 L11,9 C11,8.94348179 11.0046887,8.88805868 11.0136984,8.83409843 C9.84135601,8.42615464 9,7.31133193 9,6 C9,4.34314575 10.3431458,3 12,3 C13.6568542,3 15,4.34314575 15,6 C15,7.31133193 14.158644,8.42615464 12.9863016,8.83409843 Z" fill="#000000"/>
+                                                        <rect fill="#000000" opacity="0.3" x="5" y="18" width="14" height="2" rx="1"/>
+                                                    </g>
+                                                </svg>
+                                            </span>
+										</span>
+                                    <span class="menu-title">Posts</span>
+                                </a>
+                            </div>
+                        @endcan
+                        @can('view-any', App\Models\Role::class)
+                            <div class="menu-item">
+                                <a class="menu-link" href="{{ route('roles') }}">
+										<span class="menu-icon">
+											<span class="svg-icon svg-icon-primary svg-icon-2x">
+                                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                        <rect x="0" y="0" width="24" height="24"/>
+                                                        <path d="M12.9863016,8.83409843 C12.9953113,8.88805868 13,8.94348179 13,9 L13,11 L17,11 C18.1045695,11 19,11.8954305 19,13 L19,16 L5,16 L5,13 C5,11.8954305 5.8954305,11 7,11 L11,11 L11,9 C11,8.94348179 11.0046887,8.88805868 11.0136984,8.83409843 C9.84135601,8.42615464 9,7.31133193 9,6 C9,4.34314575 10.3431458,3 12,3 C13.6568542,3 15,4.34314575 15,6 C15,7.31133193 14.158644,8.42615464 12.9863016,8.83409843 Z" fill="#000000"/>
+                                                        <rect fill="#000000" opacity="0.3" x="5" y="18" width="14" height="2" rx="1"/>
+                                                    </g>
+                                                </svg>
+                                            </span>
+										</span>
+                                    <span class="menu-title">Roles</span>
+                                </a>
+                            </div>
+                        @endcan
                     </div>
                 </div>
             </div>
@@ -434,8 +471,8 @@ License: For each use you must have a valid license purchased only from above li
             <!--begin::Content-->
             <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
                 <!--begin::Post-->
-                @yield('content')
-                <!--end::Post-->
+            @yield('content')
+            <!--end::Post-->
             </div>
             <!--end::Content-->
             <!--begin::Footer-->
@@ -734,6 +771,8 @@ License: For each use you must have a valid license purchased only from above li
 <!--end::Main-->
 <!--begin::Javascript-->
 <!--begin::Global Javascript Bundle(used by all pages)-->
+@livewireScripts
+@include('sweetalert::alert')
 <script src="{{  asset('admin/assets/plugins/global/plugins.bundle.js')  }}"></script>
 <script src="{{  asset('admin/assets/js/scripts.bundle.js')  }}"></script>
 <!--end::Global Javascript Bundle-->
@@ -745,8 +784,6 @@ License: For each use you must have a valid license purchased only from above li
 @yield('script')
 <!--end::Page Custom Javascript-->
 <!--end::Javascript-->
-{{--@livewireScripts--}}
-{{--@include('sweetalert::alert')--}}
 </body>
 <!--end::Body-->
 </html>

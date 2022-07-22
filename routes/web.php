@@ -16,3 +16,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('admin.dashboard');
 });
+
+Route::prefix('admin')->group(function() {
+    Route::resource('categories', 'App\Http\Controllers\CategoryController');
+});
+
