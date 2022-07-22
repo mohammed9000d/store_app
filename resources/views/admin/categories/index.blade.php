@@ -6,7 +6,7 @@
 
 @section('content')
     <div class="flex justify-center">
-{{--        @livewire('categories.categories')--}}
+        @livewire('categories.categories-livewire')
     </div>
 @endsection
 
