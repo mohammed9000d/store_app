@@ -18,6 +18,8 @@ Route::get('/', function () {
 });
 
 Route::prefix('admin')->group(function() {
-    Route::resource('categories', 'App\Http\Controllers\CategoryController');
+    Route::view('categories', 'admin.categories.index');
 });
+
+
 

@@ -68,4 +68,8 @@ class Category extends Model
     public function scopeActive($query) {
         return $query->where('status', '=', 'Active');
     }
+
+    public function products() {
+        return $this->hasMany(Product::class);
+    }
 }

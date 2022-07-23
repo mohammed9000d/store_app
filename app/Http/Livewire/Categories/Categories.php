@@ -7,7 +7,7 @@ use Livewire\Component;
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
 
-class CategoriesLivewire extends Component
+class Categories extends Component
 {
     use WithFileUploads;
     use WithPagination;
@@ -16,7 +16,7 @@ class CategoriesLivewire extends Component
     public $status;
     public function render()
     {
-        return view('livewire.categories.categories-livewire', [
+        return view('livewire.categories.categories', [
             'categories' => Category::paginate(5)
         ]);
     }

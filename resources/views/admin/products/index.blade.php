@@ -6,7 +6,7 @@
 
 @section('content')
     <div class="flex justify-center">
-        @livewire('categories.categories')
+        @livewire('products.products')
     </div>
 @endsection
 
@@ -29,5 +29,5 @@
             }
         })
     </script>
-    @stack('CategoryScripts')
+    @stack('ProductScripts')
 @endsection
