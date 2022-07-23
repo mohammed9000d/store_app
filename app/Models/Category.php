@@ -55,15 +55,15 @@ class Category extends Model
         $this->attributes['slug'] = Str::slug($value);
     }
 
-    public function setImageAttribute($value)
-    {
-        if ($value == null) {
-            $this->attributes['image'] = null;
-            return;
-        }
-        $name = time(). '.' . $value->getClientOriginalExtension();
-        $this->attributes['image'] = $value->storeAs('/', $name, ['disk' => 'uploads']);
-    }
+//    public function setImageAttribute($value)
+//    {
+//        if ($value == null) {
+//            $this->attributes['image'] = null;
+//            return;
+//        }
+//        $name = time(). '.' . $value->getClientOriginalExtension();
+//        $this->attributes['image'] = $value->storeAs('/', $name, ['disk' => 'uploads']);
+//    }
 
     public function scopeActive($query) {
         return $query->where('status', '=', 'Active');

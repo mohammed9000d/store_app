@@ -14,12 +14,16 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('admin.dashboard');
+    return view('welcome');
 });
 
-Route::prefix('admin')->group(function() {
-    Route::view('categories', 'admin.categories.index');
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
+
+Route::prefix('admin')->middleware('auth')->group(function(){
+    Route::view('categories', 'admin.categories.index')->name('categories');
+    Route::view('products', 'admin.products.index')->name('products');
 });
 
-
-
+require __DIR__.'/auth.php';
