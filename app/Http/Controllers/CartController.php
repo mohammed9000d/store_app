@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Traits\CartTrait;
 use App\Models\Cart;
 use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
@@ -12,6 +13,17 @@ use Illuminate\Support\Str;
 
 class CartController extends Controller
 {
+
+    use CartTrait;
+
+    public function index()
+    {
+        $this->all();
+        return view('components.cart-menu', [
+            'cart' => $this->items,
+            'total' => $this->quantity()
+        ]);
+    }
 
     public function store(Request $request) {
         $request->validate([
@@ -24,24 +36,10 @@ class CartController extends Controller
                 }
             }]
         ]);
-        Cart::updateOrCreate([
-            'cookie_id' => $this->getCookieId(),
-            'product_id'=> $request->product_id,
-        ],[
-            'user_id' => Auth::id(),
-            'quantity' => DB::raw('quantity +'.$request->quantity),
-        ]);
+        $cart = $this->add($request->post('product_id'), $request->post('quantity', 1));
+        if($request->expectsJson()){
+            return $this->all();
+        }
         return redirect()->back()->with('success', 'Product added to cart');
     }
-
-    public function getCookieId()
-    {
-        $id = Cookie::get('cart_cookie_id');
-        if(!$id){
-            $id = Str::uuid();
-            Cookie::queue('cart_cookie_id', $id, 60 * 24 * 30);
-        }
-        return $id;
-    }
-
 }

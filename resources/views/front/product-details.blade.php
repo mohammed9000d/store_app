@@ -90,10 +90,10 @@
                                 </ul>
                             </div>
                         @endif
-                        <form action="{{ route('cart.store') }}" method="post">
-                            @csrf
+                        <form action="{{ route('cart.store') }}" method="post" id="add-to-cart">
                             <input type="hidden" name="product_id" value="{{ $product->id }}">
                             <input type="hidden" name="quantity" value="1">
+                            @csrf
                             <button class="btn btn-primary rounded" type="submit"> <i class="ion-bag"></i> Add to cart</button>
                         </form>
 
