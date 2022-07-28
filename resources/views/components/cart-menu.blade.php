@@ -1,6 +1,6 @@
 <div class="cart" data-toggle="inactive">
     <div class="label">
-        <i class="ion-bag"></i> {{ $total }}
+        <i class="ion-bag"></i> {{ $quantity }}
     </div>
 
     <div class="overlay"></div>

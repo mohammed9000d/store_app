@@ -15,6 +15,27 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
+            $table->string('number');
+            $table->foreignId('user_id')->nullable()->constrained('users')->nullOnDelete();
+            $table->unsignedFloat('shipping')->default(0);
+            $table->unsignedFloat('discount')->default(0);
+            $table->unsignedFloat('tax')->default(0);
+            $table->unsignedFloat('total')->default(0);
+            $table->enum('status', ['pending', 'processing', 'completed', 'shipped', 'cancelled'])->default('pending');
+            $table->enum('payment_status', ['unpaid', 'paid', 'refunded']);
+            $table->string('billing_name');
+            $table->string('billing_email');
+            $table->string('billing_phone');
+            $table->string('billing_address');
+            $table->string('billing_city');
+            $table->string('billing_country');
+            $table->string('shipping_name');
+            $table->string('shipping_email');
+            $table->string('shipping_phone');
+            $table->string('shipping_address');
+            $table->string('shipping_city');
+            $table->string('shipping_country');
+            $table->text('notes')->nullable();
             $table->timestamps();
         });
     }

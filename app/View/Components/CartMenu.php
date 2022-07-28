@@ -32,10 +32,9 @@ class CartMenu extends Component
      */
     public function render()
     {
-        $this->all();
         return view('components.cart-menu', [
-            'cart' => $this->items,
-            'total' => $this->quantity()
+            'cart' => $this->all(),
+            'quantity' => $this->quantity()
         ]);
     }
 }

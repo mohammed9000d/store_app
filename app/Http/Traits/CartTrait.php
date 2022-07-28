@@ -60,7 +60,15 @@ trait CartTrait
 
     public function quantity()
     {
-        $items = $this->items;
+        $items = $this->all();
         return $items->sum('quantity');
+    }
+
+    public function total()
+    {
+        $items = $this->all();
+        return $items->sum(function($item){
+            return $item->quantity * $item->product->price;
+        });
     }
 }

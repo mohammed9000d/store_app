@@ -18,9 +18,8 @@ class CartController extends Controller
 
     public function index()
     {
-        $this->all();
         return view('components.cart-menu', [
-            'cart' => $this->items,
+            'cart' => $this->all(),
             'total' => $this->quantity()
         ]);
     }

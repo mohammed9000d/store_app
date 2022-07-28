@@ -887,6 +887,7 @@ License: For each use you must have a valid license purchased only from above li
 {{--<script src="{{  asset('admin/assets/js/custom/apps/chat/chat.js')  }}"></script>--}}
 {{--<script src="{{  asset('admin/assets/js/custom/modals/create-app.js')  }}"></script>--}}
 <script src="{{  asset('admin/assets/js/custom/modals/upgrade-plan.js')  }}"></script>
+<script src="{{  asset('js/app.js')  }}"></script>
 @yield('script')
 <!--end::Page Custom Javascript-->
 <!--end::Javascript-->
