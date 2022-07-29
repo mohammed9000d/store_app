@@ -41,4 +41,7 @@ Route::get('/orders', function(){
     return \App\Models\Order::with('items')->get();
 })->name('orders');
 
+Route::get('chat', [\App\Http\Controllers\MessagesController::class, 'index'])->name('chat');
+Route::post('chat', [\App\Http\Controllers\MessagesController::class, 'store']);
+
 require __DIR__.'/auth.php';

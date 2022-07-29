@@ -18,8 +18,14 @@ Broadcast::channel('App.Models.User.{id}', function ($user, $id) {
 });
 
 Broadcast::channel('orders', function ($user){
-   if($user->type == 'super-admin' || $user->type == 'admin') {
-         return true;
-   }
+//   if($user->type == 'super-admin' || $user->type == 'admin') {
+//         return true;
+//   }
    return true;
+});
+
+Broadcast::channel('chat', function ($user){
+//   if($user->type == 'super-admin' || $user->type == 'admin') {
+         return $user;
+//   }
 });
