@@ -45,7 +45,7 @@ class OrderCreatedNotification extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->subject('New Order Created #' . $this->order->number)
+                    ->subject('New Order #' . $this->order->number)
                     ->from('invoices@localhost', 'GSG Billing')
                     ->greeting('Hello ' . $notifiable->name)
                     ->line('A new order has been created Order #:'.$this->order->number)
