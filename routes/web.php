@@ -25,6 +25,10 @@ Route::get('/dashboard', function () {
 })->middleware(['auth'])->name('dashboard');
 
 Route::prefix('admin')->middleware('auth')->group(function(){
+    Route::get('notifications', [\App\Http\Controllers\NotificationController::class, 'index'])->name('notifications');
+    Route::get('notifications/{id}', [\App\Http\Controllers\NotificationController::class, 'show'])->name('notifications.read');
+
+
     Route::view('categories', 'admin.categories.index')->name('categories');
     Route::view('products', 'admin.products.index')->name('products');
 });
